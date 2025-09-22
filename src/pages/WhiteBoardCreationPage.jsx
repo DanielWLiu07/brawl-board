@@ -10,9 +10,7 @@ const WhiteBoardCreationPage = () => {
 			</div>
 			<div className="middle-section">
 				<div className="whiteboard-aspect">
-					<h3>Whiteboard</h3>
-
-
+					
 				</div>
 			</div>
 			<div className="right-section">
