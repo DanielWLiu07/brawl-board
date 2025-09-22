@@ -2,6 +2,9 @@
   display: flex;
   height: 100vh;
   width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .left-section {
@@ -19,18 +22,38 @@
   justify-content: center;
   align-items: center;
   background: #fff;
+  overflow: hidden;
 }
 
+
 .whiteboard-aspect {
-  width: 90%;
-  aspect-ratio: 16 / 9;
-  background: #e9ecef;
+  height: 95%;
+  aspect-ratio: 690 / 1050;
+  background: #fff;
   border: 2px solid #bbb;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.whiteboard-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 12px;
+}
+
+.whiteboard-placeholder {
+  color: #888;
+  font-size: 2rem;
+  z-index: 1;
 }
 
 .right-section {
