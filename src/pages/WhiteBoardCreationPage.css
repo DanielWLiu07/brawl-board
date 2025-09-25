@@ -12,8 +12,9 @@
   border-right: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  flex: 1 1 0;
-  min-width: 0;
+  flex: 0 0.1 20em;
+  min-width: 13em;
+  z-index: 1;
 }
 
 .middle-section {
@@ -22,16 +23,20 @@
   align-items: center;
   background: #fff;
   overflow: hidden;
-  flex: 0.1 1 auto;
-  min-width: 500px;
+  min-width: 0px;
+  overflow: hidden;
+  flex: 1 1 auto;
+  position: relative;
+
 }
 
 
 .whiteboard-aspect {
   height: 95%;
   aspect-ratio: 690 / 1050;
-  min-width: 400px;
-  min-height: 608px;
+  width: auto;
+  min-width: 25em;
+  min-height: 40em;
   background: #fff;
   border: 2px solid #bbb;
   border-radius: 12px;
@@ -41,11 +46,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  z-index: 0; 
+
+  
 }
 
 .whiteboard-image {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   position: absolute;
   top: 0;
@@ -64,8 +73,9 @@
   border-left: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  flex: 1 1 0;
-  min-width: 0;
+  flex: 0 0.1 20em;
+  min-width: 13em;
+  z-index: 1;
 }
 
 .brawler-icons {
