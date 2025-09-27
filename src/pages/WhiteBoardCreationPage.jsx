@@ -11,9 +11,7 @@ const WhiteBoardCreationPage = () => {
 
 			</div>
 			<div className="middle-section">
-				<div className="whiteboard-aspect">
-					<CanvasBoard />
-				</div>
+				<CanvasBoard />
 			</div>
 			<div className="right-section">
 				<div className="brawler-icons">
