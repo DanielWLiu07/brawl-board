@@ -27,7 +27,8 @@ export const OrgSidebar = () => {
                     </span>
                 </div>
             </Link>
-            <OrganizationSwitcher />
+            <OrganizationSwitcher 
+            hidePersonal={false}/>
         </div>
     )
 
