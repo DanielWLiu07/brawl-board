@@ -27,8 +27,29 @@ export const OrgSidebar = () => {
                     </span>
                 </div>
             </Link>
-            <OrganizationSwitcher 
-            hidePersonal={false}/>
+            <div className="mx-auto width-full">
+                <OrganizationSwitcher
+            hidePersonal={false}
+            appearance={{
+              elements:{
+                rootbox:{
+                    display:"flex",
+                    justifyContent:"center",
+                    alignItems:"center",
+                    width:"100%",
+                },
+                organizationSwitcherTrigger:{
+                    padding:"6x",
+                    width:"100%",
+                    borderRadius:"8px",
+                    border:"1px solid #E5E7EB",
+                    justifyContent:"space-between",
+                }
+              }  
+            }}/>
+
+            </div>
+            
         </div>
     )
 
