@@ -39,11 +39,12 @@ export const OrgSidebar = () => {
                     width:"100%",
                 },
                 organizationSwitcherTrigger:{
-                    padding:"6x",
+                    padding:"6px",
                     width:"100%",
                     borderRadius:"8px",
                     border:"1px solid #E5E7EB",
                     justifyContent:"space-between",
+                    backgroundColor:"white",
                 }
               }  
             }}/>
