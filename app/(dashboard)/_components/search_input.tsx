@@ -2,7 +2,7 @@
 
 import qs from "query-string";
 import { Search } from "lucide-react";
-import { useDebounce } from "usehooks-ts";
+import { useDebounceValue } from "usehooks-ts";
 import { useRouter } from "next/navigation";
 
 import {
