@@ -14,6 +14,24 @@ import {
 import { Input } from "@/components/ui/input";
 
 export const SearchInput = () => {
+    const router = useRouter();
+    const [value, setValue] = useState("");
+    const [debouncedValue] = useDebounceValue(value, 500);
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setValue(e.target.value);
+    } 
+
+    useEffect(() => {
+        const url = qs.stringifyUrl({
+            url: "/",
+            query: {
+                search: debouncedValue,
+            },
+        }, {skipEmptyString: true, skipNull: true});
+        router.push(url);
+    }, [debouncedValue, router]);
+
     return (
         <div className="w-full relative">
             <Search 
@@ -21,6 +39,8 @@ export const SearchInput = () => {
             />
             <Input 
                 className="w-full max-w-[516] pl-9"
+                onChange={handleChange}
+                value={value}
             />
         </div>
     );
