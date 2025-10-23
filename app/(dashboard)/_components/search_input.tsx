@@ -15,9 +15,13 @@ import { Input } from "@/components/ui/input";
 
 export const SearchInput = () => {
     return (
-        <div className="flex items-center">
-            <Search />
-            <Input />
+        <div className="w-full relative">
+            <Search 
+                className="absolute top-1/2 left-3 transform -translate-y-1/2 text-muted foreground h-4 w-4"
+            />
+            <Input 
+                className="w-full max-w-[516] pl-9"
+            />
         </div>
     );
 };
