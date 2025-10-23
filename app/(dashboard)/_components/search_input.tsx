@@ -11,10 +11,13 @@ import {
     useState
 } from "react";
 
+import { Input } from "@/components/ui/input";
+
 export const SearchInput = () => {
     return (
         <div className="flex items-center">
-            Search Input
+            <Search />
+            <Input />
         </div>
     );
 };
