@@ -10,6 +10,9 @@ export const Navbar = () => {
                 <SearchInput />
 
             </div>
+            <div className="block lg:hidden flex-1">
+                
+            </div>
             <UserButton />
         </div>
     )
