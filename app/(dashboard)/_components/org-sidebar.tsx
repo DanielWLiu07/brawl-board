@@ -29,7 +29,7 @@ export const OrgSidebar = () => {
                         height={60}
                     />
                     <span className={cn("font-semibold text-2xl", font.className)}>
-                        Board
+                        Video Board
 
                     </span>
                 </div>
