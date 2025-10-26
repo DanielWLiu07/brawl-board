@@ -20,6 +20,7 @@ export const Navbar = () => {
                     justifyContent:"center",
                     alignItems:"center",
                     width:"100%",
+                    maxWidth:"376px"
                 },
                 organizationSwitcherTrigger:{
                     padding:"6px",
