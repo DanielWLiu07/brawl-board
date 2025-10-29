@@ -5,6 +5,7 @@ import { useOrganization } from "@clerk/nextjs";
 import { EmptyOrg } from "./_components/empty-org";
 import { useSearchParams } from "next/navigation";
 import { BoardList } from "./_components/board-list";
+
 const DashboardPage = () => {
     const { organization } = useOrganization();
 
