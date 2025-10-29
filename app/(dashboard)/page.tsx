@@ -23,8 +23,8 @@ const DashboardPage = () => {
             ) : (
                 <div>
                     <BoardList
-                        orgId = {organization.id}
-                        query = {searchParams}
+                        orgId={organization.id}
+                        query={params}
                     />
                 </div>
             )}
