@@ -1,28 +1,30 @@
 "use client";
 
+import React from "react";
 import { useOrganization } from "@clerk/nextjs";
 import { EmptyOrg } from "./_components/empty-org";
-
-
-interface DashboardPageProps {
-    searchParams: {
-        search?: string;
-        favorites?: string;
-    };
-};
-const DashboardPage = (
-    { searchParams }: DashboardPageProps
-) => {
+import { useSearchParams } from "next/navigation";
+import { BoardList } from "./_components/board-list";
+const DashboardPage = () => {
     const { organization } = useOrganization();
+
+    const searchParams = useSearchParams();
+    const params = {
+        search: searchParams.get("search") || undefined,
+        favorites: searchParams.get("favorites") || undefined,
+    };
 
     return (
         <div className="flex-1 h-[calc(100%-80px)] p-6">
-            {JSON.stringify(searchParams)}
+            {JSON.stringify(params)}
             {!organization ? (
                 <EmptyOrg />
             ) : (
                 <div>
-                    board_list
+                    <BoardList
+                        orgId = {organization.id}
+                        query = {searchParams}
+                    />
                 </div>
             )}
         </div>
