@@ -2,11 +2,11 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { ToolType } from "./toolbar";
+import { Tool } from "./toolbar";
 
 interface CanvasProps {
   boardId: string;
-  tool: ToolType;
+  tool: Tool;
   color: string;
   brushSize: number;
 }
