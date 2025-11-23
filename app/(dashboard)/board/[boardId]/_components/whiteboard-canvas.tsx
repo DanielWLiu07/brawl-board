@@ -7,7 +7,7 @@ import { SignInButton } from "@clerk/nextjs";
 import { AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AssetsSidebar } from "./assets-sidebar";
-import { Toolbar } from "./toolbar";
+import { Toolbar, type ToolType } from "./toolbar";
 import { Canvas } from "./canvas";
 
 interface WhiteboardCanvasProps {
@@ -15,7 +15,7 @@ interface WhiteboardCanvasProps {
 }
 
 export const WhiteboardCanvas = ({ boardId }: WhiteboardCanvasProps) => {
-  const [selectedTool, setSelectedTool] = useState<"pen" | "pencil" | "eraser" | "rectangle" | "circle" | "line" | "text">("pen");
+  const [selectedTool, setSelectedTool] = useState<ToolType>("pen");
   const [selectedColor, setSelectedColor] = useState("#000000");
   const [brushSize, setBrushSize] = useState(2);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -23,7 +23,7 @@ export const WhiteboardCanvas = ({ boardId }: WhiteboardCanvasProps) => {
   const { isSignedIn } = useUser();
   const isTemporary = searchParams?.get("temp") === "true" || !isSignedIn;
 
-  const handleToolChange = useCallback((tool: typeof selectedTool) => {
+  const handleToolChange = useCallback((tool: ToolType) => {
     setSelectedTool(tool);
   }, []);
 

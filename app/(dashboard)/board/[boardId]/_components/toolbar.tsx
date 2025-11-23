@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
+export type ToolType = "pen" | "pencil" | "eraser" | "rectangle" | "circle" | "line" | "text";
+
 interface ToolbarProps {
-  selectedTool: "pen" | "pencil" | "eraser" | "rectangle" | "circle" | "line" | "text";
+  selectedTool: ToolType;
   selectedColor: string;
   brushSize: number;
-  onToolChange: (tool: typeof selectedTool) => void;
+  onToolChange: (tool: ToolType) => void;
   onColorChange: (color: string) => void;
   onBrushSizeChange: (size: number) => void;
 }
