@@ -125,3 +125,33 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+/* Notebook Theme Styles */
+.handwriting-font {
+  font-family: var(--font-handwriting-kalam), var(--font-handwriting-caveat), cursive, sans-serif;
+}
+
+/* Notebook lines background */
+.notebook-lines {
+  background-image: 
+    repeating-linear-gradient(
+      transparent,
+      transparent 31px,
+      rgba(0, 0, 0, 0.05) 31px,
+      rgba(0, 0, 0, 0.05) 32px
+    );
+  background-size: 100% 32px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* Page margin for notebook effect */
+@media (min-width: 768px) {
+  .notebook-container {
+    padding-left: 4rem; /* Space for red margin line */
+  }
+}
