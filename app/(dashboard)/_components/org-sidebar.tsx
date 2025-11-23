@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Poppins } from "next/font/google"; 
 import { cn } from "@/lib/utils";
 import { OrganizationSwitcher } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, Star} from "lucide-react";
+import { LayoutDashboard, Star, SquarePen, PenTool } from "lucide-react";
 import { useSearchParams} from "next/navigation"
 
 const font = Poppins({
@@ -20,17 +19,19 @@ export const OrgSidebar = () => {
     
     return(
         <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5 bg-white">
-            <Link href = "/">
-                <div className="flex items-center gap-x-2">
-                    <Image 
-                        src = "/temp-logo.png"
-                        alt = "Logo"
-                        width={60}
-                        height={60}
-                    />
-                    <span className={cn("font-semibold text-2xl", font.className)}>
-                        Video Board
-
+            <Link href = "/" className="hover:opacity-80 transition-opacity group">
+                <div className="flex items-center gap-x-2 cursor-pointer">
+                    {/* Creative logo combining pen and board */}
+                    <div className="relative">
+                        <div className="bg-blue-600 rounded-lg p-2 shadow-md group-hover:shadow-lg transition-shadow">
+                            <div className="relative">
+                                <SquarePen className="w-6 h-6 text-white" />
+                                <PenTool className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1 rotate-12" />
+                            </div>
+                        </div>
+                    </div>
+                    <span className={cn("font-semibold text-2xl cursor-pointer handwriting-font", font.className)}>
+                        BRAWL BOARD
                     </span>
                 </div>
             </Link>

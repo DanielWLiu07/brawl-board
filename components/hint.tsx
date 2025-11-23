@@ -19,7 +19,7 @@ export const Hint = ({
     children,
     side,
     align,
-    sideOffset, 
+    sideOffset,
     alignOffset,
 }: HintProps) => {
     return (
@@ -28,18 +28,17 @@ export const Hint = ({
                 <TooltipTrigger asChild>
                     {children}
                 </TooltipTrigger>
-            <TooltipContent className="text-white bg-black border-black"
-                side={side}
-                align={align}
-                sideOffset={sideOffset}
-                alignOffset={alignOffset}
-            >
-                <p className="font-semibold capitalize">
-                    {label}
-                </p>
-            </TooltipContent>
-        </Tooltip>
-
-    </TooltipProvider>
+                <TooltipContent className="text-white bg-black border-black"
+                    side={side}
+                    align={align}
+                    sideOffset={sideOffset}
+                    alignOffset={alignOffset}
+                >
+                    <p className="font-semibold capitalize">
+                        {label}
+                    </p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     );
 };
