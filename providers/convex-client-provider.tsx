@@ -1,36 +1,38 @@
 "use client";
 
-import { ClerkProvider, useAuth, SignInButton, SignIn, SignUp} from "@clerk/nextjs";
+import React, { useMemo } from "react";
+import { useAuth, SignIn } from "@clerk/nextjs";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
-import { AuthLoading, Authenticated, ConvexReactClient, Unauthenticated} from "convex/react";
+import { AuthLoading, Authenticated, ConvexReactClient, Unauthenticated } from "convex/react";
 import { Loading } from "@/components/auth/loading";
 
+interface ConvexClientProviderProps {
+    children: React.ReactNode;
+}
 
-    interface ConvexClientProviderProps {
-        children: React.ReactNode;
-    }
-    
-    const convexURL = process.env.NEXT_PUBLIC_CONVEX_URL!;
+export const ConvexClientProvider = ({
+    children
+}: ConvexClientProviderProps) => {
+    const convex = useMemo(() => {
+        const convexURL = process.env.NEXT_PUBLIC_CONVEX_URL;
+        if (!convexURL) {
+            throw new Error("NEXT_PUBLIC_CONVEX_URL is not defined");
+        }
+        return new ConvexReactClient(convexURL);
+    }, []);
 
-    const convex = new ConvexReactClient(convexURL);
+    return (
+        <ConvexProviderWithClerk useAuth={useAuth} client={convex}>
+            <Authenticated>
+                {children}
+            </Authenticated>
 
-    export const ConvexClientProvider = ({
-         children 
-        }: ConvexClientProviderProps) => {
-            return (
-                <ClerkProvider>
-                    <ConvexProviderWithClerk useAuth={useAuth} client={convex}>
-                        <Authenticated>
-                            {children}
-                        </Authenticated>
-                        
-                        <AuthLoading>
-                            <Loading />
-                        </AuthLoading>
-                        <Unauthenticated>
-                            <SignIn routing="hash" />
-                        </Unauthenticated>
-                    </ConvexProviderWithClerk>
-                </ClerkProvider>
-            );
-        };
+            <AuthLoading>
+                <Loading />
+            </AuthLoading>
+            <Unauthenticated>
+                <SignIn routing="hash" />
+            </Unauthenticated>
+        </ConvexProviderWithClerk>
+    );
+};
