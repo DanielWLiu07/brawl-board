@@ -12,14 +12,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { 
-  FileText, 
-  Gamepad2, 
-  Zap, 
-  Users, 
+import {
+  FileText,
+  Gamepad2,
+  Users,
   Sparkles,
   Plus,
-  Palette
+  Palette,
+  AlertCircle
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
@@ -187,9 +187,10 @@ export const CreateWhiteboardDialog = ({ children }: CreateWhiteboardDialogProps
 
           {/* Warning for unauthenticated users */}
           {!isSignedIn && (
-            <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-3">
+            <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-3 flex items-start gap-2">
+              <AlertCircle className="w-5 h-5 text-yellow-700 flex-shrink-0 mt-0.5" />
               <p className="text-sm text-yellow-800 handwriting-font">
-                ⚠️ <strong>Note:</strong> Your whiteboard won't be saved. Sign in to save your work permanently.
+                <strong>Note:</strong> Your whiteboard won't be saved. Sign in to save your work permanently.
               </p>
             </div>
           )}
