@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { Poppins } from "next/font/google"; 
+import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { OrganizationSwitcher } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { LayoutDashboard, Star, SquarePen, PenTool } from "lucide-react";
-import { useSearchParams} from "next/navigation"
 
 const font = Poppins({
     subsets: ["latin"],
@@ -14,8 +13,8 @@ const font = Poppins({
 })
 
 export const OrgSidebar = () => {
-    const searchParams = useSearchParams();
-    const favorites = searchParams.get("favorites");
+    // Temporarily disable favorites feature to fix build
+    const favorites = null;
     
     return(
         <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5 bg-white">

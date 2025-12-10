@@ -21,12 +21,16 @@ export const DashboardLayout = ({
     }
 
     return (
-        <main className="h-full">
+        <main className="h-full bg-gradient-to-br from-blue-50 via-white to-blue-50 paper-texture">
+            {/* Paper texture background */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
+                <div className="notebook-lines"></div>
+            </div>
             <Sidebar />
-            <div className="pl-[60px] h-full">
+            <div className="pl-[60px] h-full relative z-10">
                 <div className="flex gap-x-3 h-full">
                     <OrgSidebar />
-                    <div className = "h-full flex-1">
+                    <div className="h-full flex-1">
                         <Navbar />
                         {children}
                     </div>

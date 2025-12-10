@@ -71,8 +71,8 @@ export const WhiteboardCanvas = ({ boardId }: WhiteboardCanvasProps) => {
       </div>
       
       {/* Toolbar at the bottom - Floating oval */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center pointer-events-none z-50 pb-6">
-        <div className="pointer-events-auto">
+      <div className="absolute bottom-0 left-0 right-0 flex justify-center pointer-events-none z-toolbar pb-6 px-6">
+        <div className="pointer-events-auto w-full max-w-4xl">
           <Toolbar
             selectedTool={selectedTool}
             selectedColor={selectedColor}
