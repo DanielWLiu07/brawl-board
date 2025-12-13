@@ -2,9 +2,13 @@ import { cn } from "@/lib/utils";
 
 interface PaperBackgroundProps {
   className?: string;
+  showMarginLine?: boolean;
 }
 
-export const PaperBackground = ({ className }: PaperBackgroundProps) => {
+export const PaperBackground = ({ 
+  className, 
+  showMarginLine = true 
+}: PaperBackgroundProps) => {
   return (
     <>
       <div className={cn("absolute inset-0 opacity-30 pointer-events-none z-0", className)}>
@@ -22,7 +26,9 @@ export const PaperBackground = ({ className }: PaperBackgroundProps) => {
         />
       </div>
 
-      <div className="absolute left-12 md:left-16 top-0 bottom-0 w-[2px] bg-[var(--margin-red)] opacity-40 z-10 hidden sm:block" />
+      {showMarginLine && (
+        <div className="absolute left-12 md:left-16 top-0 bottom-0 w-[2px] bg-[var(--margin-red)] opacity-40 z-10 hidden sm:block" />
+      )}
 
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none z-0"
