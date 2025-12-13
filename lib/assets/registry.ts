@@ -1,4 +1,10 @@
-import type { GameConfig, GameAsset, AssetGroup, GameId, AssetCategory } from "@/types/assets";
+import type { 
+  AssetCategory, 
+  AssetGroup, 
+  GameAsset, 
+  GameConfig, 
+  GameId 
+} from "@/types/assets";
 
 export const GAME_CONFIGS: GameConfig[] = [
   {
