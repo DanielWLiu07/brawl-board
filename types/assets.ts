@@ -1,5 +1,4 @@
 export type GameId = "brawl-stars" | "clash-royale" | "league-of-legends";
-
 export type AssetCategory = "heroes" | "maps" | "tactical" | "items" | "icons";
 
 export interface GameAsset {
@@ -10,12 +9,14 @@ export interface GameAsset {
   imageUrl: string;
   thumbnailUrl?: string;
   tags: string[];
-  metadata?: {
-    rarity?: string;
-    role?: string;
-    faction?: string;
-    tier?: string;
-  };
+  metadata?: GameAssetMetadata;
+}
+
+interface GameAssetMetadata {
+  rarity?: string;
+  role?: string;
+  faction?: string;
+  tier?: string;
 }
 
 export interface AssetGroup {
