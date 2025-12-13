@@ -1,15 +1,40 @@
 "use client";
 
-import { Gamepad2 } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import { ArtPlaceholder } from "./art-placeholder";
+import { SketchCard } from "@/components/ui/sketch-card";
 
-const games = [
-  { name: "Brawl Stars", color: "text-yellow-600" },
-  { name: "Clash Royale", color: "text-blue-600" },
-  { name: "Merge Tactics", color: "text-purple-600" },
-  { name: "League of Legends", color: "text-red-600" },
-  { name: "Teamfight Tactics", color: "text-green-600" },
+interface Game {
+  id: string;
+  name: string;
+  description: string;
+  assetCount: string;
+  markerColor: string;
+}
+
+const games: Game[] = [
+  {
+    id: "brawl-stars",
+    name: "Brawl Stars",
+    description: "Brawlers, maps, and modes",
+    assetCount: "400+",
+    markerColor: "bg-marker-yellow",
+  },
+  {
+    id: "clash-royale",
+    name: "Clash Royale",
+    description: "Cards, arenas, and troops",
+    assetCount: "350+",
+    markerColor: "bg-marker-blue",
+  },
+  {
+    id: "league-of-legends",
+    name: "League of Legends",
+    description: "Champions, items, and Rift",
+    assetCount: "350+",
+    markerColor: "bg-marker-pink",
+  },
 ];
 
 export const GamesSection = () => {
@@ -31,7 +56,7 @@ export const GamesSection = () => {
                 scale: 1,
                 rotation: 0,
                 duration: 0.6,
-                stagger: 0.1,
+                stagger: 0.15,
                 ease: "back.out(1.7)",
               }
             );
@@ -45,23 +70,62 @@ export const GamesSection = () => {
   }, []);
 
   return (
-    <section ref={gamesRef} className="snap-start min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto text-center w-full">
-        <h3 className="text-4xl font-bold text-gray-800 mb-12 handwriting-font underline decoration-blue-600">
-          Supported Games
-        </h3>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-          {games.map((game) => (
-            <div
-              key={game.name}
-              className="game-card bg-white/90 backdrop-blur-sm border-2 border-gray-300 rounded-xl p-6 hover:scale-105 paper-shadow hover:shadow-xl transition-all cursor-pointer"
+    <section ref={gamesRef} className="snap-start min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-paper">
+      <div className="max-w-5xl mx-auto text-center w-full">
+        <h2 className="text-4xl md:text-5xl font-bold text-ink font-handwriting-title mb-4">
+          <span className="sketch-underline">Supported Games</span>
+        </h2>
+        <p className="text-center text-pencil font-handwriting-body mb-12 max-w-2xl mx-auto">
+          Strategy planning tools for your favorite competitive games
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {games.map((game, index) => (
+            <SketchCard
+              key={game.id}
+              className={`game-card cursor-pointer group ${
+                index === 0 ? 'rotate-[-2deg]' : index === 2 ? 'rotate-[2deg]' : ''
+              }`}
             >
-              <Gamepad2 className={`w-12 h-12 mx-auto mb-3 ${game.color}`} />
-              <p className={`font-semibold ${game.color} handwriting-font`}>
-                {game.name}
-              </p>
-            </div>
+              <div className="p-6 text-center">
+                {/* Game art placeholder */}
+                <div className="mb-4">
+                  <ArtPlaceholder
+                    aspect="square"
+                    label={game.name}
+                    sublabel="Game Art"
+                    size="lg"
+                    className="mx-auto max-w-[180px]"
+                  />
+                </div>
+
+                {/* Game info */}
+                <h3 className="text-xl font-bold text-ink font-handwriting-title mb-2 group-hover:text-ink-blue transition-colors">
+                  {game.name}
+                </h3>
+                <p className="text-sm text-pencil font-handwriting-body mb-3">
+                  {game.description}
+                </p>
+
+                {/* Asset count badge */}
+                <span className={`inline-flex items-center px-3 py-1 text-sm font-handwriting ${game.markerColor} border-2 border-[var(--ink-black)] rounded-full transform -rotate-1`}>
+                  {game.assetCount} assets
+                </span>
+              </div>
+            </SketchCard>
           ))}
+        </div>
+
+        {/* Banner placeholder for featured content */}
+        <div className="mt-16">
+          <SketchCard className="p-4 rotate-[0.5deg]">
+            <ArtPlaceholder
+              aspect="banner"
+              label="Featured Games Banner"
+              sublabel="All game characters together"
+              size="lg"
+            />
+          </SketchCard>
         </div>
       </div>
     </section>

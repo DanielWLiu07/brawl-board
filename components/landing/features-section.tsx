@@ -1,30 +1,46 @@
 "use client";
 
-import { Users, Sparkles, Infinity } from "lucide-react";
+import { Users, Sparkles, Infinity, LucideIcon } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import { ArtPlaceholder } from "./art-placeholder";
+import {
+  SketchCard,
+  SketchCardHeader,
+  SketchCardTitle,
+  SketchCardDescription,
+  SketchCardContent,
+} from "@/components/ui/sketch-card";
 
-const features = [
+interface Feature {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  artLabel: string;
+  markerColor: string;
+}
+
+const features: Feature[] = [
   {
     icon: Users,
     title: "Real-Time Collaboration",
-    description: "Developed a real-time collaborative whiteboard using Next.js with WebSocket connections and MongoDB database, supporting strategy planning for 3+ popular games with live team coordination.",
-    bgColor: "bg-blue-100",
-    iconColor: "text-blue-600",
+    description: "Plan strategies with your team in real-time. See changes instantly as teammates draw, annotate, and coordinate tactics together.",
+    artLabel: "Collaboration",
+    markerColor: "bg-marker-blue",
   },
   {
     icon: Sparkles,
-    title: "Extensive Game Assets",
-    description: "Implemented drag-and-drop interface with 1000+ game assets including heroes, maps, and tactical elements.",
-    bgColor: "bg-purple-100",
-    iconColor: "text-purple-600",
+    title: "1000+ Game Assets",
+    description: "Drag and drop from our extensive library of heroes, maps, items, and tactical elements for Brawl Stars, Clash Royale, and League of Legends.",
+    artLabel: "Game Assets",
+    markerColor: "bg-marker-purple",
   },
   {
     icon: Infinity,
     title: "Unlimited Possibilities",
-    description: "Deployed full-stack application on Vercel with AWS backend and Clerk authentication, supporting persistent storage and seamless data synchronization for unlimited whiteboard possibilities.",
-    bgColor: "bg-green-100",
-    iconColor: "text-green-600",
+    description: "Save unlimited whiteboards, sync across devices, and access your strategies anytime. Your game plans are always at your fingertips.",
+    artLabel: "Cloud Sync",
+    markerColor: "bg-marker-green",
   },
 ];
 
@@ -41,8 +57,8 @@ export const FeaturesSection = () => {
           if (entry.isIntersecting) {
             gsap.fromTo(
               featureCards,
-              { opacity: 0, y: 50 },
-              { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power2.out" }
+              { opacity: 0, y: 50, rotation: -2 },
+              { opacity: 1, y: 0, rotation: 0, duration: 0.8, stagger: 0.2, ease: "power2.out" }
             );
             observer.unobserve(entry.target);
           }
@@ -54,34 +70,48 @@ export const FeaturesSection = () => {
   }, []);
 
   return (
-    <section ref={featuresRef} className="snap-start min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
+    <section ref={featuresRef} className="snap-start min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-paper-cream">
       <div className="max-w-5xl mx-auto w-full">
-        <h3 className="text-4xl font-bold text-gray-800 mb-12 text-center handwriting-font underline decoration-blue-600">
-          Features
-        </h3>
+        <h2 className="text-4xl md:text-5xl font-bold text-ink font-handwriting-title mb-4 text-center">
+          <span className="sketch-underline">Features</span>
+        </h2>
+        <p className="text-center text-pencil font-handwriting-body mb-12 max-w-2xl mx-auto">
+          Everything you need to plan winning strategies with your team
+        </p>
+
         <div className="space-y-8">
           {features.map((feature, index) => (
-            <div key={index} className="feature-card bg-white/90 backdrop-blur-sm border-2 border-gray-300 rounded-xl p-8 paper-shadow-lg hover:shadow-2xl transition-all">
-              <div className="flex items-start gap-6">
-                <div className={`${feature.bgColor} p-4 rounded-lg paper-shadow`}>
-                  <feature.icon className={`w-8 h-8 ${feature.iconColor}`} />
+            <SketchCard
+              key={index}
+              className={`feature-card ${index % 2 === 0 ? 'rotate-[0.5deg]' : 'rotate-[-0.5deg]'}`}
+            >
+              <div className="flex flex-col md:flex-row gap-6 p-6">
+                <div className={`md:w-48 flex-shrink-0 ${index % 2 === 1 ? 'md:order-2' : ''}`}>
+                  <ArtPlaceholder
+                    aspect="square"
+                    label={feature.artLabel}
+                    size="md"
+                    className="w-full"
+                  />
                 </div>
+
                 <div className="flex-1">
-                  <h4 className="text-2xl font-bold text-gray-800 mb-3 handwriting-font">
-                    {feature.title}
-                  </h4>
-                  <p className="text-lg text-gray-700 handwriting-font leading-relaxed">
-                    {feature.description.split(/(<span className="font-bold">.*?<\/span>)/g).map((part, i) => {
-                      if (part.includes('font-bold')) {
-                        const text = part.match(/>([^<]+)</)?.[1] || '';
-                        return <span key={i} className="font-bold">{text}</span>;
-                      }
-                      return part;
-                    })}
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className={`${feature.markerColor} p-3 rounded-lg border-2 border-[var(--ink-black)]`}>
+                      <feature.icon className="size-6 text-ink" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-ink font-handwriting-title">
+                        {feature.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="text-lg text-pencil font-handwriting-body leading-relaxed">
+                    {feature.description}
                   </p>
                 </div>
               </div>
-            </div>
+            </SketchCard>
           ))}
         </div>
       </div>

@@ -18,6 +18,7 @@ export const Canvas = ({ boardId, tool, color, brushSize }: CanvasProps) => {
     isDrawing,
     currentPath,
     elements,
+    previewShape,
     handleMouseDown,
     handleMouseMove,
     handleMouseUp,
@@ -28,7 +29,7 @@ export const Canvas = ({ boardId, tool, color, brushSize }: CanvasProps) => {
   return (
     <div
       ref={canvasRef}
-      className="w-full h-full canvas-paper paper-texture relative overflow-auto"
+      className="w-full h-full bg-[var(--paper-white)] relative overflow-auto notebook-ruled-margin"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -42,6 +43,7 @@ export const Canvas = ({ boardId, tool, color, brushSize }: CanvasProps) => {
         brushSize={brushSize}
         elements={elements}
         currentPath={currentPath}
+        previewShape={previewShape}
       />
       <EmptyState show={elements.length === 0 && !isDrawing} />
     </div>

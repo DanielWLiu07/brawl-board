@@ -3,8 +3,8 @@ import { gsap } from "gsap";
 
 export const useSidebarAnimations = (
   isOpen: boolean,
-  sidebarRef: React.RefObject<HTMLDivElement>,
-  contentRef: React.RefObject<HTMLDivElement>
+  sidebarRef: React.RefObject<HTMLDivElement | null>,
+  contentRef: React.RefObject<HTMLDivElement | null>
 ) => {
   useEffect(() => {
     if (!sidebarRef.current || !contentRef.current) return;

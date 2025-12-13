@@ -13,15 +13,17 @@ export const ToggleButton = ({ isCollapsed, onClick }: ToggleButtonProps) => {
     <button
       onClick={onClick}
       className={cn(
-        "p-2 rounded-lg border-2 border-gray-300 bg-white hover:bg-gray-50 transition-all duration-200 paper-shadow hover:paper-shadow-lg flex-shrink-0",
-        "hover:scale-105 active:scale-95"
+        "p-2 rounded-sm border-2 border-[var(--ink-black)] bg-[var(--paper-white)]",
+        "shadow-[2px_2px_0_var(--ink-black)] transition-all duration-150",
+        "hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0_var(--ink-black)]",
+        "active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
       )}
       title={isCollapsed ? "Expand toolbar" : "Collapse toolbar"}
     >
       {isCollapsed ? (
-        <ChevronRight className="w-5 h-5 text-gray-700" />
+        <ChevronRight className="size-4 text-[var(--ink-black)]" />
       ) : (
-        <ChevronLeft className="w-5 h-5 text-gray-700" />
+        <ChevronLeft className="size-4 text-[var(--ink-black)]" />
       )}
     </button>
   );

@@ -1,10 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Target, Plus } from "lucide-react";
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { CreateWhiteboardDialog } from "./create-whiteboard-dialog";
+import { SketchButton } from "@/components/ui/sketch-button";
+import { SketchCard } from "@/components/ui/sketch-card";
+import { ArtPlaceholder } from "./art-placeholder";
 
 export const CTASection = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -16,11 +18,18 @@ export const CTASection = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            gsap.fromTo(
-              entry.target,
-              { opacity: 0, scale: 0.9 },
-              { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" }
-            );
+            const tl = gsap.timeline();
+            tl.fromTo(
+              entry.target.querySelector(".cta-art"),
+              { opacity: 0, y: -30 },
+              { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
+            )
+              .fromTo(
+                entry.target.querySelector(".cta-content"),
+                { opacity: 0, scale: 0.9 },
+                { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" },
+                "-=0.3"
+              );
             observer.unobserve(entry.target);
           }
         });
@@ -31,21 +40,57 @@ export const CTASection = () => {
   }, []);
 
   return (
-    <section ref={ctaRef} className="snap-start min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto text-center bg-blue-100/70 backdrop-blur-sm border-2 border-blue-300 rounded-2xl p-12 paper-shadow-lg">
-        <Target className="w-16 h-16 text-blue-600 mx-auto mb-6" />
-        <h3 className="text-4xl font-bold text-gray-800 mb-6 handwriting-font">
-          Ready to Level Up Your Strategy?
-        </h3>
-        <p className="text-xl text-gray-700 mb-8 handwriting-font">
-          Join teams of gamers creating winning strategies together
-        </p>
-        <CreateWhiteboardDialog>
-          <Button size="lg" className="bg-blue-600 hover:bg-blue-700 hover:scale-105 text-xl px-8 py-6 handwriting-font paper-shadow-lg hover:shadow-2xl transition-all flex items-center gap-2 mx-auto">
-            <Plus className="w-5 h-5" />
-            Create Your First Whiteboard
-          </Button>
-        </CreateWhiteboardDialog>
+    <section ref={ctaRef} className="snap-start min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-paper-cream">
+      <div className="max-w-4xl mx-auto w-full">
+        <div className="cta-art mb-8">
+          <SketchCard className="p-4 rotate-[-0.5deg]">
+            <ArtPlaceholder
+              aspect="banner"
+              label="Characters Assembly"
+              sublabel="All heroes ready for battle"
+              size="md"
+            />
+          </SketchCard>
+        </div>
+
+        <SketchCard className="cta-content bg-marker-blue/30 p-8 md:p-12 rotate-[0.3deg]">
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-paper-white border-2 border-[var(--ink-black)] rounded-full mb-6">
+              <Target className="size-8 text-ink" />
+            </div>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-ink font-handwriting-title mb-4">
+              Ready to Level Up Your Strategy?
+            </h2>
+            <p className="text-lg text-pencil font-handwriting-body mb-8 max-w-xl mx-auto">
+              Join teams of gamers creating winning strategies together.
+              Plan, collaborate, and dominate.
+            </p>
+
+            <CreateWhiteboardDialog>
+              <SketchButton
+                variant="primary"
+                size="lg"
+                className="text-lg px-8 py-6"
+              >
+                <Plus className="size-5" />
+                Create Your First Whiteboard
+              </SketchButton>
+            </CreateWhiteboardDialog>
+
+            <div className="flex justify-center gap-6 mt-10">
+              <div className="w-12 h-12 sketch-card p-1.5 rotate-[-4deg]">
+                <ArtPlaceholder aspect="square" size="sm" showIcon={false} />
+              </div>
+              <div className="w-14 h-14 sketch-card p-1.5 rotate-[2deg]">
+                <ArtPlaceholder aspect="square" size="sm" showIcon={false} />
+              </div>
+              <div className="w-12 h-12 sketch-card p-1.5 rotate-[-2deg]">
+                <ArtPlaceholder aspect="square" size="sm" showIcon={false} />
+              </div>
+            </div>
+          </div>
+        </SketchCard>
       </div>
     </section>
   );

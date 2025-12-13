@@ -81,6 +81,35 @@ body,
   --sidebar-ring: oklch(0.704 0.04 256.788);
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
+
+  /* Sketch Theme - Ink & Pencil Colors */
+  --ink-black: #1a1a2e;
+  --ink-blue: #16537e;
+  --ink-red: #c1272d;
+  --ink-green: #2d6a4f;
+  --pencil-dark: #3d3d3d;
+  --pencil-gray: #5a5a5a;
+  --pencil-light: #8a8a8a;
+
+  /* Sketch Theme - Marker/Highlighter Colors */
+  --marker-yellow: #fef3c0;
+  --marker-pink: #fde2e4;
+  --marker-green: #d4f0c4;
+  --marker-blue: #cce5ff;
+  --marker-orange: #ffe4c4;
+  --marker-purple: #e8d4f0;
+
+  /* Sketch Theme - Paper Colors */
+  --paper-white: #fefefe;
+  --paper-cream: #f8f5f0;
+  --paper-lined: #f5f5f5;
+  --paper-aged: #f0ebe3;
+  --margin-red: #e74c3c;
+
+  /* Sketch Theme - UI Colors */
+  --sketch-border: #d0d0d0;
+  --sketch-border-dark: #a0a0a0;
+  --sketch-shadow: rgba(0, 0, 0, 0.08);
 }
 
 .dark {
@@ -280,4 +309,333 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* ========== SKETCH THEME UTILITY CLASSES ========== */
+
+/* Handwriting font variants */
+.font-handwriting {
+  font-family: var(--font-handwriting-kalam), var(--font-handwriting-caveat), cursive;
+}
+
+.font-handwriting-title {
+  font-family: var(--font-handwriting-caveat), var(--font-handwriting-kalam), cursive;
+  letter-spacing: 0.02em;
+}
+
+.font-handwriting-body {
+  font-family: var(--font-handwriting-patrick), var(--font-handwriting-kalam), cursive;
+}
+
+/* Sketch-style borders with hand-drawn effect */
+.sketch-border-rough {
+  position: relative;
+  border: 2px solid var(--sketch-border);
+  border-radius: 3px;
+}
+
+.sketch-border-rough::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--sketch-border-dark);
+  border-radius: 4px;
+  opacity: 0.3;
+  transform: rotate(0.3deg);
+  pointer-events: none;
+}
+
+.sketch-border-rough::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--sketch-border);
+  border-radius: 2px;
+  opacity: 0.5;
+  transform: rotate(-0.2deg);
+  pointer-events: none;
+}
+
+/* Sketch underline effect */
+.sketch-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.sketch-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--ink-black) 5%,
+    var(--ink-black) 95%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  transform: skewX(-3deg);
+  opacity: 0.7;
+}
+
+/* Paper backgrounds */
+.bg-paper {
+  background-color: var(--paper-white);
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(0,0,0,0.01) 0%, transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(0,0,0,0.01) 0%, transparent 40%);
+}
+
+.bg-paper-cream {
+  background-color: var(--paper-cream);
+}
+
+.bg-paper-aged {
+  background-color: var(--paper-aged);
+}
+
+/* Notebook ruled lines - horizontal */
+.notebook-ruled {
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      var(--sketch-border) 27px,
+      var(--sketch-border) 28px
+    );
+  background-size: 100% 28px;
+}
+
+/* Notebook ruled with margin */
+.notebook-ruled-margin {
+  background-image:
+    linear-gradient(to right, transparent 48px, var(--margin-red) 48px, var(--margin-red) 50px, transparent 50px),
+    repeating-linear-gradient(
+      transparent,
+      transparent 27px,
+      var(--sketch-border) 27px,
+      var(--sketch-border) 28px
+    );
+  background-size: 100% 100%, 100% 28px;
+}
+
+/* Grid paper background */
+.notebook-grid {
+  background-image:
+    linear-gradient(var(--sketch-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--sketch-border) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Dotted grid paper */
+.notebook-dots {
+  background-image: radial-gradient(circle, var(--sketch-border-dark) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Sketch card with paper effect */
+.sketch-card {
+  background: var(--paper-white);
+  border: 2px solid var(--sketch-border);
+  border-radius: 4px;
+  box-shadow:
+    2px 2px 0 var(--sketch-shadow),
+    4px 4px 0 rgba(0,0,0,0.04);
+  position: relative;
+}
+
+.sketch-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--sketch-border), transparent);
+  opacity: 0.5;
+}
+
+/* Sketch button styles */
+.sketch-btn {
+  position: relative;
+  background: var(--paper-white);
+  border: 2px solid var(--ink-black);
+  border-radius: 3px;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-handwriting-kalam), cursive;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.sketch-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink-black);
+}
+
+.sketch-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.sketch-btn-primary {
+  background: var(--ink-black);
+  color: white;
+}
+
+.sketch-btn-primary:hover {
+  background: var(--pencil-dark);
+}
+
+/* Art placeholder for custom illustrations */
+.art-placeholder {
+  border: 3px dashed var(--sketch-border-dark);
+  border-radius: 8px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(0,0,0,0.02) 10px,
+      rgba(0,0,0,0.02) 20px
+    ),
+    var(--paper-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.art-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--sketch-border);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Ink colors for text */
+.text-ink {
+  color: var(--ink-black);
+}
+
+.text-ink-blue {
+  color: var(--ink-blue);
+}
+
+.text-ink-red {
+  color: var(--ink-red);
+}
+
+.text-pencil {
+  color: var(--pencil-gray);
+}
+
+/* Marker highlight backgrounds */
+.bg-marker-yellow {
+  background-color: var(--marker-yellow);
+}
+
+.bg-marker-pink {
+  background-color: var(--marker-pink);
+}
+
+.bg-marker-green {
+  background-color: var(--marker-green);
+}
+
+.bg-marker-blue {
+  background-color: var(--marker-blue);
+}
+
+/* Tape/sticky effect for elements */
+.tape-effect {
+  position: relative;
+}
+
+.tape-effect::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 60px;
+  height: 24px;
+  background: linear-gradient(135deg, rgba(255,255,200,0.9), rgba(255,255,180,0.7));
+  border: 1px solid rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+/* Torn paper edge effect */
+.torn-edge-top {
+  position: relative;
+}
+
+.torn-edge-top::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background:
+    linear-gradient(135deg, var(--paper-white) 33.33%, transparent 33.33%),
+    linear-gradient(225deg, var(--paper-white) 33.33%, transparent 33.33%);
+  background-size: 12px 100%;
+}
+
+/* Folded corner effect */
+.folded-corner {
+  position: relative;
+  overflow: hidden;
+}
+
+.folded-corner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 24px 24px 0;
+  border-color: transparent var(--paper-cream) transparent transparent;
+  box-shadow: -2px 2px 3px rgba(0,0,0,0.1);
+}
+
+/* Sticker/badge style */
+.sticker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  background: var(--marker-yellow);
+  border: 2px solid var(--ink-black);
+  border-radius: 20px;
+  font-family: var(--font-handwriting-kalam), cursive;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transform: rotate(-2deg);
+}
+
+/* Scribble animation for loading states */
+@keyframes scribble {
+  0%, 100% {
+    transform: translateX(0) rotate(0);
+  }
+  25% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(2px) rotate(1deg);
+  }
+}
+
+.animate-scribble {
+  animation: scribble 0.3s ease-in-out infinite;
 }

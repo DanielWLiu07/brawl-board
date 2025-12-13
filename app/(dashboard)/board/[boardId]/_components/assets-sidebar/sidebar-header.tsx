@@ -1,38 +1,42 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Gamepad2, ChevronLeft } from "lucide-react";
-import { CategoryFilters } from "./category-filters";
-
-type AssetCategory = "heroes" | "maps" | "items" | "all";
+import { ChevronRight, Layers } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface SidebarHeaderProps {
-  selectedCategory: AssetCategory;
-  onCategoryChange: (category: AssetCategory) => void;
   onToggle: () => void;
+  assetCount?: number;
 }
 
-export const SidebarHeader = ({ selectedCategory, onCategoryChange, onToggle }: SidebarHeaderProps) => {
+export const SidebarHeader = ({ onToggle, assetCount = 0 }: SidebarHeaderProps) => {
   return (
-    <div className="p-4 border-b-2 border-gray-300 flex flex-col gap-3">
+    <div className="p-3 border-b-2 border-[var(--sketch-border)] bg-[var(--paper-cream)]">
       <div className="flex items-center justify-between">
-        <h3 className="font-bold text-lg flex items-center gap-2 handwriting-font">
-          <Gamepad2 className="w-5 h-5" />
-          Game Assets
-        </h3>
-        <Button
-          variant="ghost"
-          size="sm"
+        <div className="flex items-center gap-2">
+          <div className="p-1.5 bg-[var(--paper-white)] border-2 border-[var(--ink-black)] rounded-sm shadow-[2px_2px_0_var(--ink-black)]">
+            <Layers className="size-4 text-[var(--ink-black)]" />
+          </div>
+          <div>
+            <h3 className="font-handwriting-title font-bold text-sm text-[var(--ink-black)]">
+              Game Assets
+            </h3>
+            <p className="text-[10px] font-handwriting text-[var(--pencil-gray)]">
+              {assetCount}+ assets available
+            </p>
+          </div>
+        </div>
+        <button
           onClick={onToggle}
-          className="h-8 w-8 p-0 hover:bg-gray-100"
+          className={cn(
+            "p-1.5 rounded-sm border-2 border-[var(--sketch-border)]",
+            "bg-[var(--paper-white)] hover:border-[var(--sketch-border-dark)]",
+            "transition-all duration-150"
+          )}
+          title="Close Assets Panel"
         >
-          <ChevronLeft className="w-4 h-4" />
-        </Button>
+          <ChevronRight className="size-4 text-[var(--pencil-gray)]" />
+        </button>
       </div>
-      <CategoryFilters
-        selectedCategory={selectedCategory}
-        onCategoryChange={onCategoryChange}
-      />
     </div>
   );
 };

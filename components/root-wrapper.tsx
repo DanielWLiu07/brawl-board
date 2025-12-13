@@ -11,16 +11,14 @@ interface RootWrapperProps {
 export const RootWrapper = ({ children }: RootWrapperProps) => {
     const pathname = usePathname();
     
-    // If it's a public route, show children directly (no Convex auth needed)
     const isPublicRoute = pathname === "/" || 
                          pathname?.startsWith("/sign-in") || 
                          pathname?.startsWith("/sign-up") ||
-                         pathname?.startsWith("/board/"); // Allow board routes without auth for temporary boards
+                         pathname?.startsWith("/board/");
     
     if (isPublicRoute) {
         return <>{children}</>;
     }
 
-    // For all other routes (dashboard), use ConvexClientProvider for auth protection
     return <ConvexClientProvider>{children}</ConvexClientProvider>;
 };

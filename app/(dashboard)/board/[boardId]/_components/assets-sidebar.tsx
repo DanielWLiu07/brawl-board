@@ -1,81 +1,67 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import { ChevronLeft } from "lucide-react";
 import { gsap } from "gsap";
+import { cn } from "@/lib/utils";
+
 import { SidebarHeader } from "./assets-sidebar/sidebar-header";
-import { AssetTree } from "./assets-sidebar/asset-tree";
+import { GameTabs } from "./assets-sidebar/game-tabs";
+import { AssetSearch } from "./assets-sidebar/asset-search";
+import { CategoryFilters } from "./assets-sidebar/category-filters";
+import { AssetGrid } from "./assets-sidebar/asset-grid";
 import { useSidebarAnimations } from "./assets-sidebar/use-sidebar-animations";
 
-type AssetCategory = "heroes" | "maps" | "items" | "all";
-
-interface AssetItem {
-  id: string;
-  name: string;
-  category: AssetCategory;
-  imageUrl?: string;
-  children?: AssetItem[];
-}
-
-const mockAssets: AssetItem[] = [
-  {
-    id: "1",
-    name: "Brawl Stars Heroes",
-    category: "heroes",
-    children: [
-      { id: "1-1", name: "Shelly", category: "heroes" },
-      { id: "1-2", name: "Colt", category: "heroes" },
-      { id: "1-3", name: "Bull", category: "heroes" },
-    ],
-  },
-  {
-    id: "2",
-    name: "Clash Royale Cards",
-    category: "items",
-    children: [
-      { id: "2-1", name: "Knight", category: "items" },
-      { id: "2-2", name: "Archer", category: "items" },
-      { id: "2-3", name: "Giant", category: "items" },
-    ],
-  },
-  {
-    id: "3",
-    name: "League Maps",
-    category: "maps",
-    children: [
-      { id: "3-1", name: "Summoner's Rift", category: "maps" },
-      { id: "3-2", name: "Howling Abyss", category: "maps" },
-    ],
-  },
-];
+import { GAME_CONFIGS, getAssetsByGame, getGameConfig, searchAssets } from "@/lib/assets/registry";
+import type { GameId, AssetCategory, GameAsset } from "@/types/assets";
 
 export const AssetsSidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<AssetCategory>("all");
-  const [selectedItem, setSelectedItem] = useState<AssetItem | null>(null);
+  const [selectedGame, setSelectedGame] = useState<GameId>("brawl-stars");
+  const [selectedCategory, setSelectedCategory] = useState<AssetCategory | "all">("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedAsset, setSelectedAsset] = useState<GameAsset | null>(null);
+
   const sidebarRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   useSidebarAnimations(isOpen, sidebarRef, contentRef);
 
-  const filteredAssets =
-    selectedCategory === "all"
-      ? mockAssets
-      : mockAssets.filter((asset) => asset.category === selectedCategory);
+  // Get the current game config
+  const gameConfig = useMemo(() => getGameConfig(selectedGame), [selectedGame]);
 
-  const handleAssetSelect = (asset: AssetItem, element: HTMLDivElement) => {
-    gsap.to(element, {
-      scale: 1.05,
-      duration: 0.2,
-      ease: "back.out(2)",
-      yoyo: true,
-      repeat: 1,
+  // Get and filter assets
+  const filteredAssets = useMemo(() => {
+    if (searchQuery) {
+      return searchAssets(searchQuery, {
+        gameId: selectedGame,
+        category: selectedCategory === "all" ? undefined : selectedCategory,
+      });
+    }
+
+    const assetGroups = getAssetsByGame(selectedGame);
+    let assets: GameAsset[] = [];
+
+    assetGroups.forEach((group) => {
+      if (selectedCategory === "all" || group.category === selectedCategory) {
+        assets = [...assets, ...group.assets];
+      }
     });
-    setSelectedItem(asset);
+
+    return assets;
+  }, [selectedGame, selectedCategory, searchQuery]);
+
+  // Calculate total asset count
+  const totalAssetCount = useMemo(() => {
+    return GAME_CONFIGS.reduce((acc, game) => acc + game.assetCount, 0);
+  }, []);
+
+  const handleAssetSelect = (asset: GameAsset) => {
+    setSelectedAsset(asset);
   };
 
-  const handleAssetDrag = (asset: AssetItem, e: React.DragEvent) => {
+  const handleAssetDragStart = (asset: GameAsset, e: React.DragEvent) => {
     e.dataTransfer.setData("application/json", JSON.stringify(asset));
     e.dataTransfer.effectAllowed = "copy";
   };
@@ -93,46 +79,76 @@ export const AssetsSidebar = () => {
 
   return (
     <div className="relative flex items-stretch z-assets-sidebar">
+      {/* Toggle button when closed */}
       {!isOpen && (
         <button
           ref={toggleButtonRef}
           onClick={toggleSidebar}
-          className="bg-white border-l border-t border-b border-gray-300 rounded-l-lg px-2 py-4 hover:bg-gray-50 transition-colors self-center paper-shadow"
+          className={cn(
+            "bg-[var(--paper-white)] border-l-2 border-t-2 border-b-2 border-[var(--sketch-border-dark)]",
+            "rounded-l-sm px-2 py-4 self-center",
+            "hover:bg-[var(--paper-cream)] transition-colors",
+            "shadow-[-2px_2px_0_var(--sketch-shadow)]"
+          )}
           title="Open Assets Panel"
         >
-          <ChevronLeft className="w-5 h-5 text-gray-600" />
+          <ChevronLeft className="size-5 text-[var(--pencil-gray)]" />
         </button>
       )}
 
+      {/* Sidebar */}
       <div
         ref={sidebarRef}
-        className="bg-white border-l-2 border-gray-300 flex flex-col paper-shadow overflow-hidden"
-        style={{ width: isOpen ? 240 : 0 }}
+        className={cn(
+          "bg-[var(--paper-white)] border-l-2 border-[var(--sketch-border-dark)]",
+          "flex flex-col overflow-hidden",
+          "shadow-[-4px_0_8px_rgba(0,0,0,0.05)]"
+        )}
+        style={{ width: isOpen ? 280 : 0 }}
       >
-        <div ref={contentRef}>
-          <SidebarHeader
-            selectedCategory={selectedCategory}
-            onCategoryChange={setSelectedCategory}
-            onToggle={toggleSidebar}
-          />
+        <div ref={contentRef} className="flex flex-col h-full">
+          {/* Header */}
+          <SidebarHeader onToggle={toggleSidebar} assetCount={totalAssetCount} />
 
-          <div className="flex-1 overflow-y-auto p-3">
-            <div className="space-y-2">
-              {filteredAssets.map((asset) => (
-                <AssetTree
-                  key={asset.id}
-                  asset={asset}
-                  level={0}
-                  onSelect={handleAssetSelect}
-                  onDrag={handleAssetDrag}
-                  selectedItem={selectedItem}
-                />
-              ))}
-            </div>
+          {/* Game Tabs */}
+          <div className="p-2 border-b-2 border-[var(--sketch-border)]">
+            <GameTabs selectedGame={selectedGame} onGameChange={setSelectedGame} />
           </div>
 
-          <div className="p-3 border-t-2 border-gray-200 text-xs text-gray-500 text-center handwriting-font">
-            {mockAssets.reduce((acc, a) => acc + (a.children?.length || 0), 0)}+ assets
+          {/* Search */}
+          <div className="p-2 border-b-2 border-[var(--sketch-border)]">
+            <AssetSearch
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder={`Search ${gameConfig?.name || "assets"}...`}
+            />
+          </div>
+
+          {/* Category Filters */}
+          <div className="p-2 border-b-2 border-[var(--sketch-border)] bg-[var(--paper-cream)]/50">
+            <CategoryFilters
+              selectedCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+              availableCategories={gameConfig?.categories}
+            />
+          </div>
+
+          {/* Asset Grid */}
+          <AssetGrid
+            assets={filteredAssets}
+            onAssetSelect={handleAssetSelect}
+            onAssetDragStart={handleAssetDragStart}
+            selectedAssetId={selectedAsset?.id}
+            emptyMessage={searchQuery ? "No matching assets" : "No assets in this category"}
+            className="flex-1"
+          />
+
+          {/* Footer */}
+          <div className="p-2 border-t-2 border-[var(--sketch-border)] bg-[var(--paper-cream)]">
+            <p className="text-[10px] font-handwriting text-center text-[var(--pencil-gray)]">
+              {filteredAssets.length} assets shown
+              {searchQuery && ` for "${searchQuery}"`}
+            </p>
           </div>
         </div>
       </div>

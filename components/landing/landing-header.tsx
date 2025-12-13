@@ -1,50 +1,53 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { SignInButton, SignUpButton, useUser } from "@clerk/nextjs";
 import { ArrowRight, SquarePen, PenTool } from "lucide-react";
 import Link from "next/link";
+import { SketchButton } from "@/components/ui/sketch-button";
 
 export const LandingHeader = () => {
   const { isSignedIn } = useUser();
 
   return (
-    <header className="sticky top-0 z-20 border-b-2 border-gray-300 bg-white/95 backdrop-blur-md paper-shadow">
+    <header className="sticky top-0 z-50 border-b-2 border-[var(--sketch-border-dark)] bg-[var(--paper-white)]/95 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-4 flex items-center justify-between">
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-all cursor-pointer group">
             <div className="relative">
-              <div className="bg-blue-600 rounded-lg p-2 paper-shadow group-hover:scale-110 transition-transform">
+              <div className="bg-[var(--ink-black)] rounded-sm p-2 border-2 border-[var(--ink-black)] shadow-[2px_2px_0_var(--pencil-gray)] group-hover:shadow-[3px_3px_0_var(--pencil-gray)] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all">
                 <div className="relative">
-                  <SquarePen className="w-6 h-6 text-white" />
-                  <PenTool className="w-4 h-4 text-yellow-400 absolute -top-1 -right-1 rotate-12" />
+                  <SquarePen className="size-5 text-white" />
+                  <PenTool className="size-3 text-[var(--marker-yellow)] absolute -top-1 -right-1 rotate-12" />
                 </div>
               </div>
             </div>
-            <h1 className="text-3xl font-bold text-gray-800 handwriting-font">
+            <h1 className="text-2xl md:text-3xl font-bold text-ink font-handwriting-title">
               BRAWL BOARD
             </h1>
           </Link>
+
+          {/* Auth buttons */}
           <div className="flex gap-3">
             {!isSignedIn ? (
               <>
                 <SignInButton mode="modal">
-                  <Button variant="outline" className="handwriting-font border-2 border-gray-300">
+                  <SketchButton variant="ghost" size="sm" className="hidden sm:flex">
                     Sign In
-                  </Button>
+                  </SketchButton>
                 </SignInButton>
                 <SignUpButton mode="modal">
-                  <Button className="bg-blue-600 hover:bg-blue-700 handwriting-font">
+                  <SketchButton variant="primary" size="sm">
                     Get Started
-                  </Button>
+                  </SketchButton>
                 </SignUpButton>
               </>
             ) : (
               <Link href="/">
-                <Button className="bg-blue-600 hover:bg-blue-700 handwriting-font flex items-center gap-2">
+                <SketchButton variant="primary" size="sm" className="flex items-center gap-2">
                   Dashboard
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
+                  <ArrowRight className="size-4" />
+                </SketchButton>
               </Link>
             )}
           </div>
