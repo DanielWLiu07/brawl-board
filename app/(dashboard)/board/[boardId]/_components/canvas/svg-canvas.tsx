@@ -2,8 +2,6 @@
 
 import { Tool } from "../toolbar";
 import { CanvasElement } from "./use-canvas-drawing";
-import { useState } from "react";
-import { ImageIcon } from "lucide-react";
 
 interface PreviewShape {
   tool: Tool;
