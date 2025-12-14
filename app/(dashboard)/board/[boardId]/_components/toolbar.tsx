@@ -105,9 +105,7 @@ export const Toolbar = ({
       >
         {!isCollapsed ? (
           <div className="flex items-center justify-between h-full px-3">
-            {/* Tools */}
             <div className="flex items-center gap-2">
-              {/* Drawing tools */}
               <ToggleGroup
                 type="single"
                 value={selectedTool}
@@ -119,7 +117,6 @@ export const Toolbar = ({
 
               <Separator orientation="vertical" className="h-6 bg-[var(--sketch-border)]" />
 
-              {/* Shape tools */}
               <ToggleGroup
                 type="single"
                 value={selectedTool}
@@ -131,7 +128,6 @@ export const Toolbar = ({
 
               <Separator orientation="vertical" className="h-6 bg-[var(--sketch-border)]" />
 
-              {/* Other tools */}
               <ToggleGroup
                 type="single"
                 value={selectedTool}
@@ -142,7 +138,6 @@ export const Toolbar = ({
               </ToggleGroup>
             </div>
 
-            {/* Right side controls */}
             <div className="flex items-center gap-2">
               <BrushSizeControl
                 size={brushSize}

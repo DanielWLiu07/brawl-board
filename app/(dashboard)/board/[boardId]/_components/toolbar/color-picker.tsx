@@ -45,7 +45,6 @@ export const ColorPicker = ({ selectedColor, onColorChange, show }: ColorPickerP
     >
       <div className="bg-[var(--paper-white)] border-2 border-[var(--ink-black)] rounded-sm px-4 py-3 shadow-[4px_4px_0_var(--ink-black)]">
         <div className="flex items-center gap-3">
-          {/* Custom color picker */}
           <Popover>
             <PopoverTrigger asChild>
               <button
@@ -75,10 +74,8 @@ export const ColorPicker = ({ selectedColor, onColorChange, show }: ColorPickerP
             </PopoverContent>
           </Popover>
 
-          {/* Divider */}
           <div className="w-px h-8 bg-[var(--sketch-border)]" />
 
-          {/* Preset colors */}
           <div className="flex gap-1.5 flex-wrap max-w-[200px]">
             {PRESET_COLORS.map(({ color, label }) => (
               <button

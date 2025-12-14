@@ -76,7 +76,6 @@ export const AssetsSidebar = () => {
 
   return (
     <div className="relative flex items-stretch z-assets-sidebar">
-      {/* Toggle button when closed */}
       {!isOpen && (
         <button
           ref={toggleButtonRef}
@@ -93,7 +92,6 @@ export const AssetsSidebar = () => {
         </button>
       )}
 
-      {/* Sidebar */}
       <div
         ref={sidebarRef}
         className={cn(
@@ -104,15 +102,12 @@ export const AssetsSidebar = () => {
         style={{ width: isOpen ? 280 : 0 }}
       >
         <div ref={contentRef} className="flex flex-col h-full">
-          {/* Header */}
           <SidebarHeader onToggle={toggleSidebar} assetCount={totalAssetCount} />
 
-          {/* Game Tabs */}
           <div className="p-2 border-b-2 border-[var(--sketch-border)]">
             <GameTabs selectedGame={selectedGame} onGameChange={setSelectedGame} />
           </div>
 
-          {/* Search */}
           <div className="p-2 border-b-2 border-[var(--sketch-border)]">
             <AssetSearch
               value={searchQuery}
@@ -121,7 +116,6 @@ export const AssetsSidebar = () => {
             />
           </div>
 
-          {/* Category Filters */}
           <div className="p-2 border-b-2 border-[var(--sketch-border)] bg-[var(--paper-cream)]/50">
             <CategoryFilters
               selectedCategory={selectedCategory}
@@ -130,7 +124,6 @@ export const AssetsSidebar = () => {
             />
           </div>
 
-          {/* Asset Grid */}
           <AssetGrid
             assets={filteredAssets}
             onAssetSelect={handleAssetSelect}
@@ -140,7 +133,6 @@ export const AssetsSidebar = () => {
             className="flex-1"
           />
 
-          {/* Footer */}
           <div className="p-2 border-t-2 border-[var(--sketch-border)] bg-[var(--paper-cream)]">
             <p className="text-[10px] font-handwriting text-center text-[var(--pencil-gray)]">
               {filteredAssets.length} assets shown

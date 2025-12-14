@@ -36,9 +36,7 @@ export const WhiteboardCanvas = ({ boardId }: WhiteboardCanvasProps) => {
     <div className="h-full flex flex-col bg-[var(--paper-cream)] relative">
       {isTemporary && <TemporaryBoardBanner />}
 
-      {/* Main whiteboard area */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Canvas area (takes remaining space, excluding sidebar) */}
         <div className="flex-1 relative overflow-hidden border-r-2 border-[var(--sketch-border)]">
           <Canvas
             boardId={boardId}
@@ -47,12 +45,9 @@ export const WhiteboardCanvas = ({ boardId }: WhiteboardCanvasProps) => {
             brushSize={brushSize}
           />
         </div>
-
-        {/* Assets sidebar on the right */}
         <AssetsSidebar />
       </div>
 
-      {/* Toolbar at the bottom - Floating */}
       <div className="absolute bottom-0 left-0 right-0 flex justify-center pointer-events-none z-toolbar pb-4 px-4">
         <div className="pointer-events-auto w-full max-w-3xl">
           <Toolbar
