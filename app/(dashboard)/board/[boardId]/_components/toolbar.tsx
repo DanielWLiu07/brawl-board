@@ -1,6 +1,6 @@
 "use client";
 
-import { Pen, Pencil, Eraser, Square, Circle, Minus, Type, MousePointer2 } from "lucide-react";
+import { Pen } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -9,8 +9,9 @@ import { ColorPicker } from "./toolbar/color-picker";
 import { BrushSizeControl } from "./toolbar/brush-size-control";
 import { ToggleButton } from "./toolbar/toggle-button";
 import { cn } from "@/lib/utils";
+import { Tool, drawingTools, shapeTools, otherTools } from "./toolbar/tool-configs";
 
-export type Tool = "select" | "pen" | "pencil" | "eraser" | "rectangle" | "circle" | "line" | "text";
+export type { Tool };
 
 interface ToolbarProps {
   selectedTool: Tool;
@@ -20,23 +21,6 @@ interface ToolbarProps {
   onColorChange: (color: string) => void;
   onBrushSizeChange: (size: number) => void;
 }
-
-const drawingTools = [
-  { id: "pen" as const, icon: Pen, label: "Pen" },
-  { id: "pencil" as const, icon: Pencil, label: "Pencil" },
-  { id: "eraser" as const, icon: Eraser, label: "Eraser" },
-] as const;
-
-const shapeTools = [
-  { id: "rectangle" as const, icon: Square, label: "Rectangle" },
-  { id: "circle" as const, icon: Circle, label: "Circle" },
-  { id: "line" as const, icon: Minus, label: "Line" },
-] as const;
-
-const otherTools = [
-  { id: "text" as const, icon: Type, label: "Text" },
-  { id: "select" as const, icon: MousePointer2, label: "Select" },
-] as const;
 
 export const Toolbar = ({
   selectedTool,
