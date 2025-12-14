@@ -28,10 +28,8 @@ export const AssetsSidebar = () => {
 
   useSidebarAnimations(isOpen, sidebarRef, contentRef);
 
-  // Get the current game config
   const gameConfig = useMemo(() => getGameConfig(selectedGame), [selectedGame]);
 
-  // Get and filter assets
   const filteredAssets = useMemo(() => {
     if (searchQuery) {
       return searchAssets(searchQuery, {
@@ -52,7 +50,6 @@ export const AssetsSidebar = () => {
     return assets;
   }, [selectedGame, selectedCategory, searchQuery]);
 
-  // Calculate total asset count
   const totalAssetCount = useMemo(() => {
     return GAME_CONFIGS.reduce((acc, game) => acc + game.assetCount, 0);
   }, []);

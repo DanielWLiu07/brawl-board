@@ -13,16 +13,13 @@ interface ColorPickerProps {
 }
 
 const PRESET_COLORS = [
-  // Ink colors
   { color: "#1a1a2e", label: "Ink Black" },
   { color: "#16537e", label: "Ink Blue" },
   { color: "#c1272d", label: "Ink Red" },
   { color: "#2d6a4f", label: "Ink Green" },
-  // Pencil colors
   { color: "#3d3d3d", label: "Pencil Dark" },
   { color: "#5a5a5a", label: "Pencil Gray" },
   { color: "#8a8a8a", label: "Pencil Light" },
-  // Marker colors
   { color: "#f7b925", label: "Marker Yellow" },
   { color: "#e74c3c", label: "Marker Orange" },
   { color: "#9b59b6", label: "Marker Purple" },

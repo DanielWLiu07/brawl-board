@@ -13,14 +13,12 @@ const font = Poppins({
 })
 
 export const OrgSidebar = () => {
-    // Temporarily disable favorites feature to fix build
     const favorites = null;
     
     return(
         <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5 bg-white">
             <Link href = "/" className="hover:opacity-80 transition-opacity group">
                 <div className="flex items-center gap-x-2 cursor-pointer">
-                    {/* Creative logo combining pen and board */}
                     <div className="relative">
                         <div className="bg-blue-600 rounded-lg p-2 shadow-md group-hover:shadow-lg transition-shadow">
                             <div className="relative">

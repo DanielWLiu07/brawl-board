@@ -12,7 +12,6 @@ export const runtime = 'nodejs';
 function DashboardContent() {
     const { organization } = useOrganization();
 
-    // Default query params for now - can be enhanced later
     const params = {
         search: undefined,
         favorites: undefined,
@@ -38,7 +37,6 @@ const DashboardPage = () => {
     const { isSignedIn, isLoaded } = useUser();
 
     try {
-        // Show loading state
         if (!isLoaded) {
             return (
                 <div className="h-screen w-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white">
@@ -50,7 +48,6 @@ const DashboardPage = () => {
             );
         }
 
-        // Show landing page if not signed in (full page, no dashboard layout)
         if (!isSignedIn) {
             return (
                 <div className="fixed inset-0 z-50 bg-white">
@@ -59,7 +56,6 @@ const DashboardPage = () => {
             );
         }
 
-        // Show dashboard if signed in
         return (
             <Suspense fallback={
                 <div className="h-screen w-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white">

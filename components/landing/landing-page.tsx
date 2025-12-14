@@ -20,8 +20,7 @@ export const LandingPage = () => {
         <FeaturesSection />
         <GamesSection />
         <CTASection />
-LandingFooter /
-        </footer>
+<LandingFooter />
       </div>
     </div>
   );
