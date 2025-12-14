@@ -3,12 +3,10 @@
 import { useState, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { SignInButton } from "@clerk/nextjs";
-import { AlertCircle } from "lucide-react";
 import { AssetsSidebar } from "./assets-sidebar";
 import { Toolbar, type Tool } from "./toolbar";
 import { Canvas } from "./canvas";
-import { SketchButton } from "@/components/ui/sketch-button";
+import { TemporaryBoardBanner } from "./temporary-board-banner";
 
 interface WhiteboardCanvasProps {
   boardId: string;
@@ -36,22 +34,7 @@ export const WhiteboardCanvas = ({ boardId }: WhiteboardCanvasProps) => {
 
   return (
     <div className="h-full flex flex-col bg-[var(--paper-cream)] relative">
-      {/* Warning banner for temporary/unsaved boards */}
-      {isTemporary && (
-        <div className="bg-[var(--marker-yellow)] border-b-2 border-[var(--ink-black)] px-4 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <AlertCircle className="size-5 text-[var(--ink-black)]" />
-            <p className="text-sm text-[var(--ink-black)] font-handwriting">
-              <strong>This whiteboard is temporary and won't be saved.</strong> Sign in to save your work permanently.
-            </p>
-          </div>
-          <SignInButton mode="modal">
-            <SketchButton size="sm" variant="default">
-              Sign In to Save
-            </SketchButton>
-          </SignInButton>
-        </div>
-      )}
+      {isTemporary && <TemporaryBoardBanner />}
 
       {/* Main whiteboard area */}
       <div className="flex-1 flex overflow-hidden">
