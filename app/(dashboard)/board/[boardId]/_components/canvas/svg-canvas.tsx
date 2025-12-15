@@ -122,7 +122,6 @@ export const SVGCanvas = ({
         const data = element.data as { assetId: string; name: string; imageUrl: string; x: number; y: number; width: number; height: number };
         return (
           <g>
-            {/* Asset background */}
             <rect
               x={data.x - 2}
               y={data.y - 2}
@@ -133,7 +132,6 @@ export const SVGCanvas = ({
               strokeWidth={2}
               rx={4}
             />
-            {/* Asset image */}
             <image
               href={data.imageUrl}
               x={data.x}
@@ -142,7 +140,6 @@ export const SVGCanvas = ({
               height={data.height}
               preserveAspectRatio="xMidYMid meet"
             />
-            {/* Asset label */}
             <text
               x={data.x + data.width / 2}
               y={data.y + data.height + 14}
@@ -221,12 +218,10 @@ export const SVGCanvas = ({
       className="absolute inset-0 w-full h-full z-canvas"
       style={{ cursor: getCursor() }}
     >
-      {/* Render all elements */}
       {elements.map((element) => (
         <g key={element.id}>{renderElement(element)}</g>
       ))}
 
-      {/* Render current drawing path */}
       {currentPath && (
         <path
           d={currentPath}
@@ -239,7 +234,6 @@ export const SVGCanvas = ({
         />
       )}
 
-      {/* Render shape preview */}
       {renderPreviewShape()}
     </svg>
   );
