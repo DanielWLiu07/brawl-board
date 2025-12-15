@@ -12,7 +12,6 @@ export const LandingHeader = () => {
     <header className="sticky top-0 z-50 border-b-2 border-[var(--sketch-border-dark)] bg-[var(--paper-white)]/95 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-4 flex items-center justify-between">
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-all cursor-pointer group">
             <div className="relative">
               <div className="bg-[var(--ink-black)] rounded-sm p-2 border-2 border-[var(--ink-black)] shadow-[2px_2px_0_var(--pencil-gray)] group-hover:shadow-[3px_3px_0_var(--pencil-gray)] group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-all">
@@ -27,7 +26,6 @@ export const LandingHeader = () => {
             </h1>
           </Link>
 
-          {/* Auth buttons */}
           <div className="flex gap-3">
             {!isSignedIn ? (
               <>

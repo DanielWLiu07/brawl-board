@@ -90,7 +90,6 @@ export const CreateWhiteboardDialog = ({ children }: CreateWhiteboardDialogProps
         </DialogHeader>
         
         <div className="space-y-6 py-4">
-          {/* Board Name Input */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700 handwriting-font">
               Whiteboard Name
@@ -108,7 +107,6 @@ export const CreateWhiteboardDialog = ({ children }: CreateWhiteboardDialogProps
             />
           </div>
 
-          {/* Graphic Selection */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700 handwriting-font">
               Choose a Style
@@ -154,7 +152,6 @@ export const CreateWhiteboardDialog = ({ children }: CreateWhiteboardDialogProps
             </div>
           </div>
 
-          {/* Preview */}
           {boardName && (
             <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4">
               <p className="text-xs text-gray-500 mb-2 handwriting-font">Preview:</p>
@@ -185,7 +182,6 @@ export const CreateWhiteboardDialog = ({ children }: CreateWhiteboardDialogProps
             </div>
           )}
 
-          {/* Warning for unauthenticated users */}
           {!isSignedIn && (
             <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-3 flex items-start gap-2">
               <AlertCircle className="w-5 h-5 text-yellow-700 flex-shrink-0 mt-0.5" />
@@ -195,7 +191,6 @@ export const CreateWhiteboardDialog = ({ children }: CreateWhiteboardDialogProps
             </div>
           )}
 
-          {/* Action Buttons */}
           <div className="flex gap-3 pt-2">
             <Button
               variant="outline"

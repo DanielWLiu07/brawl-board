@@ -73,7 +73,6 @@ export const HeroSection = () => {
               </CreateWhiteboardDialog>
             </div>
 
-            {/* Mini decorative sketches */}
             <div className="flex gap-4 mt-10 justify-center lg:justify-start">
               <div className="mini-sketch w-16 h-16 sketch-card p-2 rotate-[-3deg]">
                 <ArtPlaceholder aspect="square" size="sm" showIcon={false} />
@@ -98,7 +97,6 @@ export const HeroSection = () => {
                 className="min-h-[300px] md:min-h-[400px]"
               />
             </div>
-            {/* Floating accent cards */}
             <div className="absolute -bottom-4 -left-4 w-24 h-24 sketch-card p-2 rotate-[-6deg] hidden md:block">
               <ArtPlaceholder aspect="square" size="sm" showIcon={false} label="Sketch 1" />
             </div>

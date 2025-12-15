@@ -88,7 +88,6 @@ export const GamesSection = () => {
               }`}
             >
               <div className="p-6 text-center">
-                {/* Game art placeholder */}
                 <div className="mb-4">
                   <ArtPlaceholder
                     aspect="square"
@@ -99,7 +98,6 @@ export const GamesSection = () => {
                   />
                 </div>
 
-                {/* Game info */}
                 <h3 className="text-xl font-bold text-ink font-handwriting-title mb-2 group-hover:text-ink-blue transition-colors">
                   {game.name}
                 </h3>
@@ -107,7 +105,6 @@ export const GamesSection = () => {
                   {game.description}
                 </p>
 
-                {/* Asset count badge */}
                 <span className={`inline-flex items-center px-3 py-1 text-sm font-handwriting ${game.markerColor} border-2 border-[var(--ink-black)] rounded-full transform -rotate-1`}>
                   {game.assetCount} assets
                 </span>
@@ -116,7 +113,6 @@ export const GamesSection = () => {
           ))}
         </div>
 
-        {/* Banner placeholder for featured content */}
         <div className="mt-16">
           <SketchCard className="p-4 rotate-[0.5deg]">
             <ArtPlaceholder
