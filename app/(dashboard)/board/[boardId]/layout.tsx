@@ -16,7 +16,6 @@ export default function BoardLayout({ children }: BoardLayoutProps) {
 
   return (
     <div className="h-full flex flex-col">
-      {/* Minimal header with logo and back button */}
       <div className="h-14 bg-white border-b-2 border-gray-300 flex items-center px-4 md:px-6 gap-4 z-modal paper-shadow">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-all group">
           <div className="relative">
@@ -41,7 +40,6 @@ export default function BoardLayout({ children }: BoardLayoutProps) {
           <span className="sm:hidden">Home</span>
         </Button>
       </div>
-      {/* Full screen whiteboard */}
       <div className="flex-1 overflow-hidden">
         {children}
       </div>

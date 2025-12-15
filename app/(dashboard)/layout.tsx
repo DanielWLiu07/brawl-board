@@ -15,14 +15,12 @@ export const DashboardLayout = ({
     const pathname = usePathname();
     const isBoardRoute = pathname?.startsWith("/board/");
 
-    // For board routes, don't show dashboard sidebar/navbar (board has its own layout)
     if (isBoardRoute) {
         return <main className="h-full">{children}</main>;
     }
 
     return (
         <main className="h-full bg-gradient-to-br from-blue-50 via-white to-blue-50 paper-texture">
-            {/* Paper texture background */}
             <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
                 <div className="notebook-lines"></div>
             </div>
