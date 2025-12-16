@@ -63,12 +63,9 @@ export const CreateWhiteboardDialog = ({ children }: CreateWhiteboardDialogProps
       return;
     }
 
-    // Generate a board ID and navigate to it
-    // For unauthenticated users, boards won't be saved
     const boardId = `board-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     const isTemporary = !isSignedIn;
-    
-    // Navigate to the whiteboard (works for both authenticated and unauthenticated users)
+
     router.push(`/board/${boardId}?name=${encodeURIComponent(boardName)}&graphic=${selectedGraphic.id}${isTemporary ? '&temp=true' : ''}`);
     setOpen(false);
     setBoardName("");
